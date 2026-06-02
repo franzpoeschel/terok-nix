@@ -299,23 +299,6 @@ let
           poetry-core
           poetry-dynamic-versioning
         ];
-
-        postInstall = ''
-          mkdir -p "$out/bin"
-          cd "$out/bin"
-          for i in                        \
-            ${final.terok-shield}/bin/*   \
-            ${final.terok-executor}/bin/* \
-            ${final.terok-sandbox}/bin/*  ;
-          do
-            if [[ -e "$out/bin/$(basename "$i")" ]]
-            then
-                continue
-            fi
-            ln -s "$i"
-          done
-          cd -
-        '';
       };
     };
 
