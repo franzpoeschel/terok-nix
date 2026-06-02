@@ -1,15 +1,17 @@
 {
-  description = "A very basic flake";
+  description = "Terok Nix package distribution";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
   };
 
-  outputs = { self, nixpkgs }: {
-
-    packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
-
-    packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
-
-  };
+  outputs = { self, nixpkgs, flake-utils }:
+    let
+      make-outputs = { nixpkgs }: system:
+        let pkgs = import ./. { pkgs = import nixpkgs; inherit system; };
+        in {
+          legacyPackages = pkgs;
+        };
+    in
+    flake-utils.lib.eachDefaultSystem (make-outputs { inherit nixpkgs; });
 }
