@@ -54,50 +54,6 @@ let
         doCheck = false;
       };
 
-      # pdm-backend = final.buildPythonPackage {
-      #   pname = "pdm-backend";
-      #   version = "2.4.8";
-
-      #   src = fetchPypi {
-      #     pname = "pdm_backend";
-      #     inherit (final.pdm-backend) version;
-      #     sha256 = "sha256-2O+F0sQwbuZxlUEtcB+umYPoTsZXRZjiZ5iuJrezx+A=";
-      #   };
-
-      #   propagatedBuildInputs = [ ];
-
-      #   pyproject = true;
-      #   build-system = [
-      #     final.setuptools
-      #   ];
-
-      #   doCheck = false;
-      # };
-
-      # agent-client-protocol = final.buildPythonPackage {
-      #   pname = "agent-client-protocol";
-      #   version = "0.10.0";
-
-      #   src = fetchFromGitHub {
-      #     owner = "agentclientprotocol";
-      #     repo = "python-sdk";
-      #     rev = final.agent-client-protocol.version;
-      #     sha256 = "sha256-JndUYT3oimoDs6WDA4ixhNCZnswUAZA4nab5DT1xpbQ=";
-      #   };
-
-      #   propagatedBuildInputs = [
-      #     final.pydantic
-      #   ];
-
-      #   pyproject = true;
-      #   build-system = [
-      #     final.pdm-backend
-      #     final.setuptools
-      #   ];
-
-      #   doCheck = false;
-      # };
-
       terok-shield = final.buildPythonPackage {
         pname = "terok-shield";
         version = "v0.6.42a9";
@@ -107,8 +63,6 @@ let
           ref = "refs/tags/v0.6.42a9";
           rev = "987a2fe5c1a2a5ec87c2259ae9de1dc589909b8a";
         };
-
-        # patches = [ ./terok-shield-version.patch ];
 
         buildInputs = with final; [
           terok-util
@@ -202,8 +156,6 @@ let
           ref = "refs/tags/v0.0.149a24";
           rev = "b039b44c8c349acfa28361f2ed2af5f2daadca55";
         };
-
-        # patches = [ ./terok-executor-version.patch ];
 
         propagatedBuildInputs = with final; [
           agent-client-protocol
