@@ -13,9 +13,10 @@ let
       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
         (python-final: python-prev: {
           asyncvarlink = callPackage ./asyncvarlink { };
-          unique-namer = callPackage ./unique-namer { };
+          terok-clearance = callPackage ./terok-clearance { };
           terok-shield = callPackage ./terok-shield { };
           terok-util = callPackage ./terok-util { };
+          unique-namer = callPackage ./unique-namer { };
         })
       ];
 

@@ -12,37 +12,6 @@ let
     , libiconv
     }:
     final: prev: {
-      terok-clearance = final.buildPythonPackage {
-        pname = "terok-clearance";
-        version = "v0.6.14a7";
-
-        src = builtins.fetchGit {
-          url = "https://github.com/terok-ai/terok-clearance.git";
-          ref = "refs/tags/v0.6.14a7";
-          rev = "26b5bf1e5f2183efec2b8723f7dc616c2d3305de";
-        };
-
-        patches = [ ./terok-clearance-version.patch ];
-
-        buildInputs = with final; [
-          terok-util
-        ];
-
-        propagatedBuildInputs = with final; [
-          asyncvarlink
-          dbus-fast
-          pyyaml
-          poetry-core
-          poetry-dynamic-versioning
-          terok-util
-        ];
-
-        pyproject = true;
-        build-system = [ final.setuptools ];
-
-        doCheck = false;
-      };
-
       terok-sandbox = final.buildPythonPackage {
         pname = "terok-sandbox";
         version = "v0.0.124a20";
