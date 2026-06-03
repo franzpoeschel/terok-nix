@@ -11,7 +11,9 @@ let
       # python overlay as in
       # https://discourse.nixos.org/t/add-python-package-via-overlay/19783/3
       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
-        (python-final: python-prev: { })
+        (python-final: python-prev: {
+          unique-namer = callPackage ./unique-namer { };
+        })
       ];
 
       python3 =
