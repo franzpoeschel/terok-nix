@@ -14,6 +14,8 @@ let
         (python-final: python-prev: {
           asyncvarlink = callPackage ./asyncvarlink { };
           unique-namer = callPackage ./unique-namer { };
+          terok-shield = callPackage ./terok-shield { };
+          terok-util = callPackage ./terok-util { };
         })
       ];
 

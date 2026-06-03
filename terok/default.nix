@@ -12,33 +12,6 @@ let
     , libiconv
     }:
     final: prev: {
-      terok-shield = final.buildPythonPackage {
-        pname = "terok-shield";
-        version = "v0.6.42a9";
-
-        src = builtins.fetchGit {
-          url = "https://github.com/terok-ai/terok-shield.git";
-          ref = "refs/tags/v0.6.42a9";
-          rev = "987a2fe5c1a2a5ec87c2259ae9de1dc589909b8a";
-        };
-
-        buildInputs = with final; [
-          terok-util
-        ];
-
-        propagatedBuildInputs = with final; [
-          pydantic
-          pyyaml
-          poetry-core
-          poetry-dynamic-versioning
-        ];
-
-        pyproject = true;
-        build-system = [ final.setuptools ];
-
-        doCheck = false;
-      };
-
       terok-clearance = final.buildPythonPackage {
         pname = "terok-clearance";
         version = "v0.6.14a7";
@@ -146,34 +119,6 @@ let
         '';
       };
 
-      terok-util = final.buildPythonPackage {
-        pname = "terok-util";
-        version = "v0.0.2a1";
-
-        src = builtins.fetchGit {
-          url = "https://github.com/terok-ai/terok-util.git";
-          ref = "refs/tags/v0.0.2a1";
-          rev = "5bc833a0e01e35423522e4f727592711ffd25071";
-        };
-
-        patches = [ ./terok-util-version.patch ];
-
-        buildInputs = with final; [
-          platformdirs
-          ruamel-yaml
-        ];
-
-        propagatedBuildInputs = with final; [
-          pydantic
-          poetry-core
-          poetry-dynamic-versioning
-        ];
-
-        pyproject = true;
-        build-system = [ final.setuptools ];
-
-        doCheck = false;
-      };
 
       terok = final.buildPythonApplication {
         pname = "terok";
