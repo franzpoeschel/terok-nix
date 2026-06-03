@@ -12,41 +12,6 @@ let
     , libiconv
     }:
     final: prev: {
-      terok-sandbox = final.buildPythonPackage {
-        pname = "terok-sandbox";
-        version = "v0.0.124a20";
-
-        src = builtins.fetchGit {
-          url = "https://github.com/terok-ai/terok-sandbox.git";
-          ref = "refs/tags/v0.0.124a20";
-          rev = "a96d6ed60e47ae648c23eff864c6c076bb9b11c1";
-        };
-
-        patches = [ ./terok-sandbox-version.patch ];
-
-        propagatedBuildInputs = with final; [
-          aiohttp
-          cryptography
-          jinja2
-          keyring
-          packaging
-          platformdirs
-          prompt-toolkit
-          pydantic
-          ruamel-yaml
-          sqlcipher3
-          terok-shield
-          terok-clearance
-          terok-util
-          pyyaml
-        ];
-
-        pyproject = true;
-        build-system = [ final.setuptools ];
-
-        doCheck = false;
-      };
-
       terok-executor = final.buildPythonPackage {
         pname = "terok-executor";
         version = "v0.0.149a24";
