@@ -14,6 +14,7 @@ let
         (python-final: python-prev: {
           asyncvarlink = callPackage ./asyncvarlink { };
           terok-clearance = callPackage ./terok-clearance { };
+          terok-executor = callPackage ./terok-executor { };
           terok-sandbox = callPackage ./terok-sandbox { };
           terok-shield = callPackage ./terok-shield { };
           terok-util = callPackage ./terok-util { };

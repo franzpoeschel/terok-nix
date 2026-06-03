@@ -12,48 +12,6 @@ let
     , libiconv
     }:
     final: prev: {
-      terok-executor = final.buildPythonPackage {
-        pname = "terok-executor";
-        version = "v0.0.149a24";
-
-        src = builtins.fetchGit {
-          url = "https://github.com/terok-ai/terok-executor.git";
-          ref = "refs/tags/v0.0.149a24";
-          rev = "b039b44c8c349acfa28361f2ed2af5f2daadca55";
-        };
-
-        propagatedBuildInputs = with final; [
-          agent-client-protocol
-          prompt-toolkit
-          rich
-          pyyaml
-          pydantic
-          ruamel-yaml
-          terok-sandbox
-          tomli-w
-          poetry-core
-          poetry-dynamic-versioning
-        ];
-
-        pyproject = true;
-        build-system = [ final.setuptools ];
-
-        doCheck = false;
-
-        # Nix is a bit eager in patching shell interpreter locations.
-        # Undo the patch for the in-container scripts (such as opencode).
-        # There is no Nix inside the containers, hence no patching needed.
-        postFixup = ''
-          find \
-            "$out/${final.python.sitePackages}/terok_executor/resources/scripts" \
-            -type f -print0 |
-          while IFS= read -r -d "" file; do
-            sed -i 's|#!${final.python}/bin/python3|#!/usr/bin/env python3|' "$file"
-          done
-        '';
-      };
-
-
       terok = final.buildPythonApplication {
         pname = "terok";
         version = "v0.7.9";
