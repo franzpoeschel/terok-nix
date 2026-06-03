@@ -29,7 +29,7 @@ python3Packages.buildPythonPackage {
   pyproject = true;
   build-system = [ python3Packages.setuptools ];
 
-  doCheck = false;
+  doCheck = true;
 
   # Nix is a bit eager in patching shell interpreter locations.
   # Undo the patch for the in-container scripts (such as opencode).

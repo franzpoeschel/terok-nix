@@ -29,6 +29,6 @@ python3Packages.buildPythonPackage {
   pyproject = true;
   build-system = [ python3Packages.setuptools ];
 
-  doCheck = false;
+  doCheck = true;
 }
 

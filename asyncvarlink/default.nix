@@ -20,6 +20,6 @@ python3Packages.buildPythonPackage rec {
     setuptools
   ];
 
-  doCheck = false;
+  doCheck = true;
 }
 
