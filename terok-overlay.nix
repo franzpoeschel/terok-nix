@@ -12,6 +12,7 @@ let
       # https://discourse.nixos.org/t/add-python-package-via-overlay/19783/3
       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
         (python-final: python-prev: {
+          asyncvarlink = callPackage ./asyncvarlink { };
           unique-namer = callPackage ./unique-namer { };
         })
       ];

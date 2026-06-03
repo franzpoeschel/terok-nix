@@ -1,0 +1,25 @@
+{ fetchPypi
+, python3Packages
+}:
+
+python3Packages.buildPythonPackage rec {
+  pname = "asyncvarlink";
+  version = "0.3.1";
+
+  src = fetchPypi {
+    pname = "asyncvarlink";
+    inherit version;
+    sha256 = "sha256-KIP5vtNarJQWpxPdbtSOzNq2k8GC65QFaeEFiGzHW9k=";
+  };
+
+  propagatedBuildInputs = [ ];
+
+  pyproject = true;
+  build-system = with python3Packages; [
+    flit-core
+    setuptools
+  ];
+
+  doCheck = false;
+}
+

@@ -12,27 +12,6 @@ let
     , libiconv
     }:
     final: prev: {
-      asyncvarlink = final.buildPythonPackage {
-        pname = "asyncvarlink";
-        version = "0.3.1";
-
-        src = fetchPypi {
-          pname = "asyncvarlink";
-          inherit (final.asyncvarlink) version;
-          sha256 = "sha256-KIP5vtNarJQWpxPdbtSOzNq2k8GC65QFaeEFiGzHW9k=";
-        };
-
-        propagatedBuildInputs = [ ];
-
-        pyproject = true;
-        build-system = [
-          final.flit-core
-          final.setuptools
-        ];
-
-        doCheck = false;
-      };
-
       terok-shield = final.buildPythonPackage {
         pname = "terok-shield";
         version = "v0.6.42a9";
