@@ -13,6 +13,7 @@ let
       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
         (python-final: python-prev: {
           asyncvarlink = callPackage ./asyncvarlink { };
+          terok = python-final.toPythonModule  final.terok;
           terok-clearance = callPackage ./terok-clearance { };
           terok-executor = callPackage ./terok-executor { };
           terok-sandbox = callPackage ./terok-sandbox { };
