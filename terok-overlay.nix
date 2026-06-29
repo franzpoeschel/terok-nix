@@ -13,6 +13,9 @@ let
       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
         (python-final: python-prev: {
           asyncvarlink = callPackage ./asyncvarlink { };
+          dbus-fast = callPackage ./dbus-fast {
+            old-dbus-fast = python-prev.dbus-fast;
+          };
           terok = python-final.toPythonModule final.terok;
           terok-clearance = callPackage ./terok-clearance { };
           terok-executor = callPackage ./terok-executor { };

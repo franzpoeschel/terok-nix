@@ -13,8 +13,6 @@ python3Packages.buildPythonPackage rec {
     sha256 = "sha256-shq0XMyic9+bNsFI8o2C24005y5Znm2UyepKq4Sdx3g=";
   };
 
-  patches = [ ./terok-clearance-version.patch ];
-
   buildInputs = with python3Packages; [
     terok-util
   ];
