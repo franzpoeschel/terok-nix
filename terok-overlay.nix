@@ -12,6 +12,7 @@ let
       # https://discourse.nixos.org/t/add-python-package-via-overlay/19783/3
       pythonPackagesOverlays = (prev.pythonPackagesOverlays or [ ]) ++ [
         (python-final: python-prev: {
+          agent-client-protocol = callPackage ./agent-client-protocol { };
           asyncvarlink = callPackage ./asyncvarlink { };
           dbus-fast = callPackage ./dbus-fast {
             old-dbus-fast = python-prev.dbus-fast;
