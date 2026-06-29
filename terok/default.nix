@@ -2,15 +2,15 @@
 , python3Packages
 }:
 
-python3Packages.buildPythonApplication {
+python3Packages.buildPythonApplication rec {
   pname = "terok";
-  version = "v0.7.9";
+  version = "v0.8.3";
 
   src = fetchFromGitHub {
     owner = "terok-ai";
     repo = "terok";
-    rev = "v0.7.9";
-    sha256 = "sha256-Byo4Er0vi7dQe5dZZLUFV0vuVMOwWhV382sPO6o9R4Y=";
+    rev = version;
+    sha256 = "sha256-DNkW38dw2Xgtyxe8+Ytz5YV2YfLfogOOfnB7rzLgRpc=";
   };
 
   patches = [ ./terok-version.patch ];

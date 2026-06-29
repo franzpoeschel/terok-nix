@@ -2,15 +2,15 @@
 , python3Packages
 }:
 
-python3Packages.buildPythonPackage {
+python3Packages.buildPythonPackage rec {
   pname = "terok-executor";
-  version = "v0.0.149a24";
+  version = "v0.2.1";
 
   src = fetchFromGitHub {
     owner = "terok-ai";
     repo = "terok-executor";
-    rev = "v0.0.149a24";
-    sha256 = "sha256-S9Nks5+EOvzMU0GTmcl+pnxGQGn5q5livfC2ty2KTTw=";
+    rev = version;
+    sha256 = "sha256-z7uXWrsXv41gAgRJo+rbZRBLUauI4HuFePpZoi4q9ZU=";
   };
 
   propagatedBuildInputs = with python3Packages; [
@@ -25,6 +25,8 @@ python3Packages.buildPythonPackage {
     poetry-core
     poetry-dynamic-versioning
   ];
+
+  patches = [ ./terok-executor-version.patch ];
 
   pyproject = true;
   build-system = [ python3Packages.setuptools ];

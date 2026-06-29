@@ -2,15 +2,15 @@
 , python3Packages
 }:
 
-python3Packages.buildPythonPackage {
+python3Packages.buildPythonPackage rec {
   pname = "terok-clearance";
-  version = "v0.6.14a7";
+  version = "v0.7.1";
 
   src = fetchFromGitHub {
     owner = "terok-ai";
     repo = "terok-clearance";
-    rev = "v0.6.14a7";
-    sha256 = "sha256-IHCR5oC9YcFLzndF34PHkBvB+L9oBEIKl3PpjJKyB3E=";
+    rev = version;
+    sha256 = "sha256-shq0XMyic9+bNsFI8o2C24005y5Znm2UyepKq4Sdx3g=";
   };
 
   patches = [ ./terok-clearance-version.patch ];

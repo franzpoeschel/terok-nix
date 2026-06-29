@@ -1,0 +1,13 @@
+diff --git a/pyproject.toml b/pyproject.toml
+index 7f3ef62..4e10200 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -27,7 +27,7 @@ dependencies = [
+     "prompt-toolkit>=3.0",
+     "pydantic>=2.9",
+     "rich>=13.0",
+-    "agent-client-protocol>=0.10.1",
++    "agent-client-protocol>=0.10.0",
+ ]
+ 
+ [project.urls]

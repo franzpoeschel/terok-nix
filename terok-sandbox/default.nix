@@ -2,15 +2,15 @@
 , python3Packages
 }:
 
-python3Packages.buildPythonPackage {
+python3Packages.buildPythonPackage rec {
   pname = "terok-sandbox";
-  version = "v0.0.124a20";
+  version = "v0.3.1";
 
   src = fetchFromGitHub {
     owner = "terok-ai";
     repo = "terok-sandbox";
-    rev = "v0.0.124a20";
-    sha256 = "sha256-1ica2ii6+nWDUPo1jZFKGea2R5EA3dJ7DTpTYtjHqZ0=";
+    rev = version;
+    sha256 = "sha256-AK9Vjq8w2MEg7JxhSDJSr3pb5/6lZz21hBcaSfxdzS4=";
   };
 
   patches = [ ./terok-sandbox-version.patch ];

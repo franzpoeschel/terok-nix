@@ -2,15 +2,15 @@
 , python3Packages
 }:
 
-python3Packages.buildPythonPackage {
+python3Packages.buildPythonPackage rec {
   pname = "terok-shield";
-  version = "v0.6.42a9";
+  version = "v0.7.1";
 
   src = fetchFromGitHub {
     owner = "terok-ai";
     repo = "terok-shield";
-    rev = "v0.6.42a9";
-    sha256 = "sha256-iU4TsaFWb/FFagjdHGcL29WxEkg8ci7UjU78AMeTqSQ=";
+    rev = version;
+    sha256 = "sha256-9Zb83FrzJ7YcDb52OuHM0+jfLddQ7D17FlmXzb0SmME=";
   };
 
   buildInputs = with python3Packages; [
