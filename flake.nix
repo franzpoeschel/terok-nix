@@ -31,7 +31,12 @@
             config = self.checks.${system}.pre-commit-check.config;
             inherit (config) package configFile;
             script = ''
-              ${pkgs.lib.getExe package} run --all-files --config ${configFile}
+              if (( $# == 0 )); then
+                files=(--all-files)
+              else
+                files=(--files "$@")
+              fi
+              ${pkgs.lib.getExe package} run --config ${configFile} "''${files[@]}"
             '';
           in
           pkgs.writeShellScriptBin "pre-commit-run" script;
