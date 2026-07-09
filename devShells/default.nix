@@ -7,6 +7,8 @@ let
         git
         pre-commit
         nixfmt
+        cabal-install
+        ghc
       ];
     };
   };
