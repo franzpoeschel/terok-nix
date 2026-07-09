@@ -11,6 +11,9 @@
         let pkgs = import ./. { pkgs = import nixpkgs; inherit system; };
         in {
           legacyPackages = pkgs;
+          devShells = import ./devShells {
+            pkgs = self.legacyPackages.${system};
+          };
         })
     //
     {
