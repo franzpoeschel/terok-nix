@@ -6,16 +6,12 @@
   };
 
   outputs = { self, nixpkgs, flake-utils }:
-    (
-      let
-        make-outputs = { nixpkgs }: system:
-          let pkgs = import ./. { pkgs = import nixpkgs; inherit system; };
-          in {
-            legacyPackages = pkgs;
-          };
-      in
-      flake-utils.lib.eachDefaultSystem (make-outputs { inherit nixpkgs; })
-    )
+    flake-utils.lib.eachDefaultSystem
+      (system:
+        let pkgs = import ./. { pkgs = import nixpkgs; inherit system; };
+        in {
+          legacyPackages = pkgs;
+        })
     //
     {
       overlays.default = import ./terok-overlay.nix;
