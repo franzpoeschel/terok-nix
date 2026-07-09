@@ -25,7 +25,6 @@
         };
         devShells = import ./devShells {
           inherit pkgs;
-          checks = self.checks.${system};
         };
         formatter =
           let
