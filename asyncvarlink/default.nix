@@ -1,5 +1,6 @@
-{ fetchPypi
-, python3Packages
+{
+  fetchPypi,
+  python3Packages,
 }:
 
 python3Packages.buildPythonPackage rec {
@@ -22,4 +23,3 @@ python3Packages.buildPythonPackage rec {
 
   doCheck = true;
 }
-

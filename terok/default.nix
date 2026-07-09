@@ -1,5 +1,6 @@
-{ fetchFromGitHub
-, python3Packages
+{
+  fetchFromGitHub,
+  python3Packages,
 }:
 
 python3Packages.buildPythonApplication rec {

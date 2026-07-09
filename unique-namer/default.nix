@@ -1,5 +1,6 @@
-{ fetchFromGitHub
-, python3Packages
+{
+  fetchFromGitHub,
+  python3Packages,
 }:
 
 python3Packages.buildPythonPackage {
@@ -22,4 +23,3 @@ python3Packages.buildPythonPackage {
 
   doCheck = true;
 }
-

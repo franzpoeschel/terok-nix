@@ -1,6 +1,7 @@
-{ pkgs ? import <nixpkgs>
-, overlays ? [ ]
-, system ? builtins.currentSystem
+{
+  pkgs ? import <nixpkgs>,
+  overlays ? [ ],
+  system ? builtins.currentSystem,
 }:
 
 let

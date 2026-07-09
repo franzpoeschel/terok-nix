@@ -23,7 +23,10 @@
           pkgs = import nixpkgs;
           inherit system;
         };
-        devShells = import ./devShells { inherit pkgs; };
+        devShells = import ./devShells {
+          inherit pkgs;
+          checks = self.checks.${system};
+        };
         formatter =
           let
             config = self.checks.${system}.pre-commit-check.config;
