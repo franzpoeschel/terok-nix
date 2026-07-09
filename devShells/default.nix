@@ -9,7 +9,7 @@ let
         [
           git
           pre-commit
-          nixfmt
+            nixfmt
         ]
         ++ enabledPackages;
       inherit shellHook;
