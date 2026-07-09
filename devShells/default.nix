@@ -5,7 +5,7 @@
       nativeBuildInputs = with pkgs; [
         git
         pre-commit
-        nixpkgs-fmt
+        nixfmt
       ];
     };
 }
