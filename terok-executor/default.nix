@@ -5,13 +5,13 @@
 
 python3Packages.buildPythonPackage rec {
   pname = "terok-executor";
-  version = "v0.2.1";
+  version = "v0.3.0";
 
   src = fetchFromGitHub {
     owner = "terok-ai";
     repo = "terok-executor";
     rev = version;
-    sha256 = "sha256-z7uXWrsXv41gAgRJo+rbZRBLUauI4HuFePpZoi4q9ZU=";
+    sha256 = "sha256-EBcE+OWHjA2xEOo7iQwL22M8b0/3B6kWfR0sjeMFwrI=";
   };
 
   propagatedBuildInputs = with python3Packages; [

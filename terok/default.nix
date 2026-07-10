@@ -5,13 +5,13 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "terok";
-  version = "v0.8.3";
+  version = "v0.8.4";
 
   src = fetchFromGitHub {
     owner = "terok-ai";
     repo = "terok";
     rev = version;
-    sha256 = "sha256-DNkW38dw2Xgtyxe8+Ytz5YV2YfLfogOOfnB7rzLgRpc=";
+    sha256 = "sha256-0KEIsF3QIh/h46L148Gx4XqQfn8VIFKl2Da3qKes4Uw=";
   };
 
   patches = [ ./terok-version.patch ];

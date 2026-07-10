@@ -5,13 +5,13 @@
 
 python3Packages.buildPythonPackage rec {
   pname = "terok-sandbox";
-  version = "v0.3.1";
+  version = "v0.4.0";
 
   src = fetchFromGitHub {
     owner = "terok-ai";
     repo = "terok-sandbox";
     rev = version;
-    sha256 = "sha256-AK9Vjq8w2MEg7JxhSDJSr3pb5/6lZz21hBcaSfxdzS4=";
+    sha256 = "sha256-a3SnkqM34wT7ZwDzrby8rK+JvTcQkD3W/KHh6BCYe2g=";
   };
 
   patches = [ ./terok-sandbox-version.patch ];

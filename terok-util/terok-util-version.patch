@@ -1,13 +1,10 @@
 diff --git a/pyproject.toml b/pyproject.toml
-index 1d8aa34..2fe0edc 100644
 --- a/pyproject.toml
 +++ b/pyproject.toml
-@@ -17,7 +17,7 @@ keywords = ["terok", "shared", "utilities"]
- requires-python = ">=3.12,<4.0"
- dynamic = ["version", "classifiers"]
+@@ -19,6 +19,6 @@ dynamic = ["version", "classifiers"]
  dependencies = [
--    "platformdirs>=4.10.0",
-+    "platformdirs>=4.0.0",
-     "ruamel.yaml>=0.18",
+-    "platformdirs~=4.10",
++    "platformdirs>=4.0",
+     "ruamel.yaml==0.19.1",
+     "jinja2~=3.1",
  ]
- 

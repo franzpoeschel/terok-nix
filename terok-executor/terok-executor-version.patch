@@ -1,13 +1,15 @@
 diff --git a/pyproject.toml b/pyproject.toml
-index 7f3ef62..4e10200 100644
+index 01b548e..0809775 100644
 --- a/pyproject.toml
 +++ b/pyproject.toml
-@@ -27,7 +27,7 @@ dependencies = [
-     "prompt-toolkit>=3.0",
-     "pydantic>=2.9",
-     "rich>=13.0",
--    "agent-client-protocol>=0.10.1",
-+    "agent-client-protocol>=0.10.0",
+@@ -25,8 +25,8 @@ dependencies = [
+     "Jinja2~=3.1",
+     "tomli-w~=1.2",
+     "prompt-toolkit~=3.0",
+-    "pydantic~=2.13",
+-    "rich~=15.0",
++    "pydantic~=2.12.5",
++    "rich~=14.3.3",
+     "agent-client-protocol==0.10.1",
  ]
  
- [project.urls]

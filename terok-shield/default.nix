@@ -5,14 +5,16 @@
 
 python3Packages.buildPythonPackage rec {
   pname = "terok-shield";
-  version = "v0.7.1";
+  version = "v0.7.2";
 
   src = fetchFromGitHub {
     owner = "terok-ai";
     repo = "terok-shield";
     rev = version;
-    sha256 = "sha256-9Zb83FrzJ7YcDb52OuHM0+jfLddQ7D17FlmXzb0SmME=";
+    sha256 = "sha256-Fs7gyIVdD55q/hp64XL5yB++6LZsRmj3qj/gJi8+3/I=";
   };
+
+  patches = [ ./terok-shield-pydantic.patch ];
 
   buildInputs = with python3Packages; [
     terok-util
