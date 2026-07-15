@@ -16,6 +16,8 @@ let
         dbus-fast = callPackage ./dbus-fast {
           old-dbus-fast = python-prev.dbus-fast;
         };
+        mkdocs-terok = callPackage ./mkdocs-terok { };
+        properdocs = callPackage ./properdocs { };
         terok = python-final.toPythonModule final.terok;
         terok-clearance = callPackage ./terok-clearance { };
         terok-executor = callPackage ./terok-executor { };
@@ -36,6 +38,8 @@ let
       self;
 
     python3Packages = final.python3.pkgs;
+
+    enable-terok-checks = builtins.abort "Use an overlay to select if tests should be disabled or enabled.";
   };
 in
 packages

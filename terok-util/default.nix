@@ -1,6 +1,7 @@
 {
   fetchFromGitHub,
   python3Packages,
+  enable-terok-checks,
 }:
 
 python3Packages.buildPythonPackage rec {
@@ -18,19 +19,31 @@ python3Packages.buildPythonPackage rec {
 
   buildInputs = with python3Packages; [
     platformdirs
-    ruamel-yaml
   ];
 
   propagatedBuildInputs = with python3Packages; [
     pydantic
     poetry-core
     poetry-dynamic-versioning
+    ruamel-yaml
   ];
 
   pyproject = true;
   build-system = [ python3Packages.setuptools ];
 
-  doCheck = false;
+  nativeCheckInputs = with python3Packages; [
+    pytest
+    pytest-asyncio
+  ];
+
+  doCheck = enable-terok-checks;
+
+  installCheckPhase = ''
+    runHook preInstallCheck
+    export PYTHONPATH="${src}:$PYTHONPATH"
+    pytest tests/ -v
+    runHook postInstallCheck
+  '';
 
   pythonRuntimeDepsCheckHook = null;
 }

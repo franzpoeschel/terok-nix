@@ -5,29 +5,26 @@
 }:
 
 python3Packages.buildPythonPackage rec {
-  pname = "terok-clearance";
-  version = "v0.7.3";
+  pname = "mkdocs-terok";
+  version = "v0.8.0";
 
   src = fetchFromGitHub {
     owner = "terok-ai";
-    repo = "terok-clearance";
+    repo = "mkdocs-terok";
     rev = version;
-    sha256 = "sha256-KWCDPhF8iDBOYnXM7bYro1/IxYe5P8fHiIPpj0rJwww=";
+    sha256 = "sha256-2UbR8WHiFS2oVElXPYe0Duz0yNtJ5cAMTm0UVAu8LQ0=";
   };
 
-  patches = [ ./terok-clearance-asyncvarlink.patch ];
+  patches = [ ./mkdocs-terok-version.patch ];
 
   buildInputs = with python3Packages; [
-    terok-util
+    hatchling
+    hatch-vcs
   ];
-
   propagatedBuildInputs = with python3Packages; [
-    asyncvarlink
-    dbus-fast
+    properdocs
     pyyaml
-    poetry-core
-    poetry-dynamic-versioning
-    terok-util
+    squarify
   ];
 
   pyproject = true;
@@ -35,19 +32,14 @@ python3Packages.buildPythonPackage rec {
 
   nativeCheckInputs = with python3Packages; [
     pytest
-    pytest-asyncio
     pydantic
-    python-dbusmock
-    ruamel-yaml
   ];
 
   doCheck = enable-terok-checks;
   installCheckPhase = ''
     runHook preInstallCheck
     export PYTHONPATH="${src}:$PYTHONPATH"
-    pytest tests/ -v --ignore=tests/integration
+    pytest tests/ -v
     runHook postInstallCheck
   '';
-
-  pythonRuntimeDepsCheckHook = null;
 }

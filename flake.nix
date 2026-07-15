@@ -47,6 +47,8 @@
               nixfmt.enable = true;
             };
           };
+          inherit (pkgs.with-checks) terok;
+          terok-without-checks = pkgs.terok;
         };
       }
     )
