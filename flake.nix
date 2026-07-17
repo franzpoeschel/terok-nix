@@ -40,6 +40,15 @@
           };
           inherit (pkgs.with-checks) terok;
           terok-without-checks = pkgs.terok;
+          terok-integration =
+            pkgs.runCommand "terok-tests"
+              {
+                nativeBuildInputs = [ pkgs.terok.test-env ];
+              }
+              ''
+                ${pkgs.terok.test-env}/bin/terok-test-env
+                touch "$out"
+              '';
         };
       }
     )
