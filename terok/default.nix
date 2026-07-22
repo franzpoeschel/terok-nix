@@ -5,7 +5,7 @@
   enable-terok-checks,
   buildFHSEnv,
   coreutils,
-  writeShellScript,
+  writeShellScriptBin,
 }:
 
 let
@@ -62,7 +62,7 @@ let
       # find some other solution
       runHook postInstallCheck
     '';
-    passthru = { inherit test-env; };
+    passthru = { inherit integration-tests; };
   };
 
   test-python-env = python3Packages.python.withPackages (
@@ -76,7 +76,7 @@ let
     ++ terok.propagatedBuildInputs
   );
 
-  test-env = writeShellScript "run" ''
+  integration-tests = writeShellScriptBin "run" ''
     set -eo pipefail
 
     unset TMPDIR
@@ -89,7 +89,11 @@ let
 
     export PYTHONPATH="$dir/src:''${PYTHONPATH:-}"
     export PATH="${terok}/bin:$PATH"
-    ${test-python-env}/bin/python -m pytest tests/ -v --ignore=tests/integration --ignore=tests/unit/tui/test_version_branch_detection.py
+    ${test-python-env}/bin/python \
+      -m pytest tests/ \
+      -v \
+      --ignore=tests/integration \
+      --ignore=tests/unit/tui/test_version_branch_detection.py
   '';
 
 in
