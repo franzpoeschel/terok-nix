@@ -1,15 +1,20 @@
-{ pkgs }:
+{ pkgs, checks }:
 let
+  inherit (checks.pre-commit-check) shellHook enabledPackages;
   shells = {
     default = shells.edit-packaging;
     edit-packaging = pkgs.mkShell {
-      nativeBuildInputs = with pkgs; [
-        git
-        pre-commit
-        nixfmt
-        cabal-install
-        ghc
-      ];
+      nativeBuildInputs =
+        with pkgs;
+        [
+          git
+          pre-commit
+          nixfmt
+          cabal-install
+          ghc
+        ]
+        ++ enabledPackages;
+      inherit shellHook;
     };
   };
 in
