@@ -6,7 +6,7 @@ on:
     branches: [main]
 jobs:
   nix-checks-ubuntu:
-    name: Run Nix checks on Ubuntu
+    name: Nix flake check on Ubuntu
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -16,7 +16,7 @@ jobs:
       - run: |
           nix flake check --verbose
   integration-tests-ubuntu:
-    name: Run Nix checks on Ubuntu
+    name: Integration tests on Ubuntu
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
