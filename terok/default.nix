@@ -1,10 +1,7 @@
 {
   fetchFromGitHub,
   python3Packages,
-  nftables,
   enable-terok-checks,
-  buildFHSEnv,
-  coreutils,
   writeShellScriptBin,
 }:
 
@@ -45,23 +42,10 @@ let
       poetry-dynamic-versioning
     ];
 
-    nativeCheckInputs = with python3Packages; [
-      pytest
-      pytest-asyncio
-      httpx
-      mkdocs
-      mkdocs-terok
-      nftables
-      terok-executor
-    ];
-
     doCheck = enable-terok-checks;
-    installCheckPhase = ''
-      runHook preInstallCheck
-      # TODO Nix build env is too restrictive for Terok tests,
-      # find some other solution
-      runHook postInstallCheck
-    '';
+    # No custom install check for terok package, Nix build env is too
+    # restrictive for that. Run `nix run .#terok.integration-tests` instead
+    # on some system that has the necessary tooling (nft, podman, ...).
     passthru = { inherit integration-tests; };
   };
 
