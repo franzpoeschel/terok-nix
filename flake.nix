@@ -46,7 +46,7 @@
                 nativeBuildInputs = [ pkgs.terok.test-env ];
               }
               ''
-                ${pkgs.terok.test-env}/bin/terok-test-env
+                ${pkgs.terok.test-env}/bin/run
                 touch "$out"
               '';
         };

@@ -76,32 +76,21 @@ let
     ++ terok.propagatedBuildInputs
   );
 
-  test-env = buildFHSEnv {
-    name = "terok-test-env";
-    targetPkgs =
-      pkgs: with pkgs; [
-        podman
-        coreutils
-        nftables
-        test-python-env
-      ];
+  test-env = writeShellScript "run" ''
+    set -eo pipefail
 
-    runScript = writeShellScript "run" ''
-      set -eo pipefail
+    unset TMPDIR
+    dir="$(mktemp -d)"
+    trap "rm -r $dir; echo 'removed test dir'" EXIT
 
-      unset TMPDIR
-      dir="$(mktemp -d)"
-      trap "rm -r $dir; echo 'removed test dir'" EXIT
+    cp -a ${src}/. "$dir"
+    cd "$dir"
+    chmod -R a+w ./
 
-      cp -a ${src}/. "$dir"
-      cd "$dir"
-      chmod -R a+w ./
-
-      export PYTHONPATH="$dir/src:$PYTHONPATH"
-      export PATH="${terok}/bin:$PATH"
-      pytest tests/ -v --ignore=tests/integration --ignore=tests/unit/tui/test_version_branch_detection.py
-    '';
-  };
+    export PYTHONPATH="$dir/src:''${PYTHONPATH:-}"
+    export PATH="${terok}/bin:$PATH"
+    ${test-python-env}/bin/python -m pytest tests/ -v --ignore=tests/integration --ignore=tests/unit/tui/test_version_branch_detection.py
+  '';
 
 in
 terok
