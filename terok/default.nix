@@ -88,7 +88,7 @@ let
     chmod -R a+w ./
 
     export PYTHONPATH="$dir/src:''${PYTHONPATH:-}"
-    export PATH="${terok}/bin:$PATH"
+    export PATH="${terok}/bin:${python3Packages.terok-executor}/bin:$PATH"
     ${test-python-env}/bin/python \
       -m pytest tests/ \
       -v \
