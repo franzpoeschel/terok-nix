@@ -12,7 +12,7 @@ python3Packages.buildPythonPackage rec {
     owner = "terok-ai";
     repo = "mkdocs-terok";
     rev = version;
-    sha256 = "sha256-QIDDtm1v3BVHF/NOGaJo7IkXZyynus4wdEedQcOo8Ug=";
+    sha256 = "sha256-nnlCL4DxsKhTaVYoIud+rVgtvm3MJwaFmg9xOX7tvII=";
   };
 
   patches = [ ./mkdocs-terok-version.patch ];
