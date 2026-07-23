@@ -4,17 +4,18 @@
   enable-terok-checks,
   nftables,
   podman,
+  git,
 }:
 
 python3Packages.buildPythonPackage rec {
   pname = "terok-executor";
-  version = "v0.3.0";
+  version = "v0.3.1";
 
   src = fetchFromGitHub {
     owner = "terok-ai";
     repo = "terok-executor";
     rev = version;
-    sha256 = "sha256-EBcE+OWHjA2xEOo7iQwL22M8b0/3B6kWfR0sjeMFwrI=";
+    sha256 = "sha256-+CcHHeVEAguGLZ5byuWWxMUQYsf5y+WBzZmRySAtd4c=";
   };
 
   propagatedBuildInputs = with python3Packages; [
@@ -40,6 +41,7 @@ python3Packages.buildPythonPackage rec {
     pytest-asyncio
     nftables
     podman
+    git
   ];
 
   doCheck = enable-terok-checks;

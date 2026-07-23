@@ -6,13 +6,13 @@
 
 python3Packages.buildPythonPackage rec {
   pname = "mkdocs-terok";
-  version = "v0.8.0";
+  version = "v0.8.1";
 
   src = fetchFromGitHub {
     owner = "terok-ai";
     repo = "mkdocs-terok";
     rev = version;
-    sha256 = "sha256-2UbR8WHiFS2oVElXPYe0Duz0yNtJ5cAMTm0UVAu8LQ0=";
+    sha256 = "sha256-nnlCL4DxsKhTaVYoIud+rVgtvm3MJwaFmg9xOX7tvII=";
   };
 
   patches = [ ./mkdocs-terok-version.patch ];

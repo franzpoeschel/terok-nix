@@ -6,12 +6,12 @@
 }:
 
 let
-  version = "v0.8.4";
+  version = "v0.8.5";
   src = fetchFromGitHub {
     owner = "terok-ai";
     repo = "terok";
     rev = version;
-    sha256 = "sha256-0KEIsF3QIh/h46L148Gx4XqQfn8VIFKl2Da3qKes4Uw=";
+    sha256 = "sha256-HhrEPOCIumHs14snepNyPwIvNS2qCxBstp+dd2aGJXQ=";
   };
   terok = python3Packages.buildPythonApplication rec {
     pname = "terok";
