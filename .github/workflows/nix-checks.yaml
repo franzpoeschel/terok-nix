@@ -1,17 +1,36 @@
 name: Nix Checks
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
-
+    branches: [main]
 jobs:
   nix-checks-ubuntu:
-    name: Run Nix checks on Ubuntu
+    name: Nix flake check on Ubuntu
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: cachix/install-nix-action@v31
         with:
           nix_path: nixpkgs=channel:nixos-26.05
-      - run: nix flake check --verbose
+      - run: |
+          nix flake check --verbose
+  integration-tests-ubuntu:
+    name: Integration tests on Ubuntu
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: cachix/install-nix-action@v31
+        with:
+          nix_path: nixpkgs=channel:nixos-26.05
+      - run: |
+          sudo apt install -y nftables
+          nix run .#terok.integration-tests
