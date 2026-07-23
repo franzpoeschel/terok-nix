@@ -4,6 +4,7 @@
   enable-terok-checks,
   nftables,
   podman,
+  git,
 }:
 
 python3Packages.buildPythonPackage rec {
@@ -40,6 +41,7 @@ python3Packages.buildPythonPackage rec {
     pytest-asyncio
     nftables
     podman
+    git
   ];
 
   doCheck = enable-terok-checks;
