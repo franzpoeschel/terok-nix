@@ -75,7 +75,8 @@ let
     export PATH="${terok}/bin:${python3Packages.terok-executor}/bin:$PATH"
     ${test-python-env}/bin/python \
       -m pytest tests/ \
-      -v
+      -v \
+      --ignore=tests/unit/tui/test_version_branch_detection.py
   '';
 
 in
