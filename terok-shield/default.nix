@@ -51,15 +51,12 @@ let
 
     patches = [ ./terok-shield-pydantic.patch ];
 
-    buildInputs = with python3Packages; [
-      terok-util
-    ];
-
     propagatedBuildInputs = with python3Packages; [
       pydantic
       pyyaml
       poetry-core
       poetry-dynamic-versioning
+      terok-util
     ];
 
     pyproject = true;
