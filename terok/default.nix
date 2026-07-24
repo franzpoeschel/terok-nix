@@ -76,7 +76,6 @@ let
     ${test-python-env}/bin/python \
       -m pytest tests/ \
       -v \
-      --ignore=tests/integration \
       --ignore=tests/unit/tui/test_version_branch_detection.py
   '';
 
