@@ -3,9 +3,10 @@
   python3Packages,
   nftables,
   enable-terok-checks,
+  writeShellScriptBin,
 }:
 
-python3Packages.buildPythonPackage rec {
+let
   pname = "terok-shield";
   version = "v0.7.2";
 
@@ -16,34 +17,71 @@ python3Packages.buildPythonPackage rec {
     sha256 = "sha256-Fs7gyIVdD55q/hp64XL5yB++6LZsRmj3qj/gJi8+3/I=";
   };
 
-  patches = [ ./terok-shield-pydantic.patch ];
+  test-python-env = python3Packages.python.withPackages (
+    p: with p; [
+      pytest
+      pytest-asyncio
+      ruamel-yaml
+      pydantic
+      pyyaml
+      terok-util
+    ]
+  );
 
-  buildInputs = with python3Packages; [
-    terok-util
-  ];
+  integration-tests = writeShellScriptBin "run" ''
+    set -eo pipefail
 
-  propagatedBuildInputs = with python3Packages; [
-    pydantic
-    pyyaml
-    poetry-core
-    poetry-dynamic-versioning
-  ];
+    unset TMPDIR
+    dir="$(mktemp -d)"
+    trap "rm -r $dir; echo 'removed test dir'" EXIT
 
-  pyproject = true;
-  build-system = [ python3Packages.setuptools ];
+    cp -a ${src}/. "$dir"
+    cd "$dir"
+    chmod -R a+w ./
 
-  nativeCheckInputs = with python3Packages; [
-    pytest
-    pytest-asyncio
-    ruamel-yaml
-    nftables
-  ];
-
-  doCheck = enable-terok-checks;
-  installCheckPhase = ''
-    runHook preInstallCheck
-    export PYTHONPATH="${src}:$PYTHONPATH"
-    pytest tests/ -v --ignore=tests/integration/dns
-    runHook postInstallCheck
+    export PYTHONPATH="$dir/src:''${PYTHONPATH:-}"
+    export PATH="${nftables}/bin:$PATH"
+    ${test-python-env}/bin/python \
+      -m pytest tests/integration/dns \
+      -v
   '';
-}
+
+  pkg = python3Packages.buildPythonPackage {
+    inherit pname version src;
+
+    patches = [ ./terok-shield-pydantic.patch ];
+
+    buildInputs = with python3Packages; [
+      terok-util
+    ];
+
+    propagatedBuildInputs = with python3Packages; [
+      pydantic
+      pyyaml
+      poetry-core
+      poetry-dynamic-versioning
+    ];
+
+    pyproject = true;
+    build-system = [ python3Packages.setuptools ];
+
+    nativeCheckInputs = with python3Packages; [
+      pytest
+      pytest-asyncio
+      ruamel-yaml
+      nftables
+    ];
+
+    doCheck = enable-terok-checks;
+    installCheckPhase = ''
+      runHook preInstallCheck
+      export PYTHONPATH="${src}:$PYTHONPATH"
+      pytest tests/ -v --ignore=tests/integration/dns
+      runHook postInstallCheck
+    '';
+
+    passthru = { inherit integration-tests; };
+  };
+
+in
+pkg

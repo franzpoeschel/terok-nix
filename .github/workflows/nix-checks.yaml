@@ -34,3 +34,5 @@ jobs:
       - run: |
           sudo apt install -y nftables podman
           nix run .#terok.integration-tests
+          nix run .#terok-clearance.integration-tests
+          nix run .#terok-shield.integration-tests

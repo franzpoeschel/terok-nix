@@ -6,6 +6,8 @@ with final;
 let
   packages = {
     terok = callPackage ./terok { };
+    terok-clearance = callPackage ./terok-clearance { };
+    terok-shield = callPackage ./terok-shield { };
 
     # python overlay as in
     # https://discourse.nixos.org/t/add-python-package-via-overlay/19783/3
