@@ -42,10 +42,22 @@ let
       poetry-dynamic-versioning
     ];
 
+    nativeCheckInputs = with python3Packages; [
+      pytest
+    ];
     doCheck = enable-terok-checks;
-    # No custom install check for terok package, Nix build env is too
-    # restrictive for that. Run `nix run .#terok.integration-tests` instead
+    # Only a basic install check for terok package, Nix build env is too
+    # restrictive for Terok tests otherwise.
+    # Run `nix run .#terok.integration-tests` instead
     # on some system that has the necessary tooling (nft, podman, ...).
+    # However, the test_version_branch_detection test must run on
+    # the installed package, so do that here.
+    installCheckPhase = ''
+      runHook preInstallCheck
+      export PYTHONPATH="${src}:$PYTHONPATH"
+      pytest tests/unit/tui/test_version_branch_detection.py
+      runHook postInstallCheck
+    '';
     passthru = { inherit integration-tests; };
   };
 
@@ -76,7 +88,6 @@ let
     ${test-python-env}/bin/python \
       -m pytest tests/ \
       -v \
-      --ignore=tests/integration \
       --ignore=tests/unit/tui/test_version_branch_detection.py
   '';
 
