@@ -39,6 +39,9 @@ let
       textual-serve
       unique-namer
       jinja2
+    ];
+
+    build-system = with python3Packages; [
       poetry-core
       poetry-dynamic-versioning
     ];

@@ -24,13 +24,14 @@ python3Packages.buildPythonPackage rec {
 
   propagatedBuildInputs = with python3Packages; [
     pydantic
-    poetry-core
-    poetry-dynamic-versioning
     ruamel-yaml
   ];
 
   pyproject = true;
-  build-system = [ python3Packages.setuptools ];
+  build-system = with python3Packages; [
+    poetry-core
+    poetry-dynamic-versioning
+  ];
 
   nativeCheckInputs = with python3Packages; [
     pytest

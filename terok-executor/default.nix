@@ -28,14 +28,15 @@ python3Packages.buildPythonPackage rec {
     ruamel-yaml
     terok-sandbox
     tomli-w
-    poetry-core
-    poetry-dynamic-versioning
   ];
 
   patches = [ ./terok-executor-version.patch ];
 
   pyproject = true;
-  build-system = [ python3Packages.setuptools ];
+  build-system = with python3Packages; [
+    poetry-core
+    poetry-dynamic-versioning
+  ];
 
   nativeCheckInputs = with python3Packages; [
     pytest

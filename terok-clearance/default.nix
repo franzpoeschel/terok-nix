@@ -61,13 +61,14 @@ let
       asyncvarlink
       dbus-fast
       pyyaml
-      poetry-core
-      poetry-dynamic-versioning
       terok-util
     ];
 
     pyproject = true;
-    build-system = [ python3Packages.setuptools ];
+    build-system = with python3Packages; [
+      poetry-core
+      poetry-dynamic-versioning
+    ];
 
     nativeCheckInputs = with python3Packages; [
       pytest
