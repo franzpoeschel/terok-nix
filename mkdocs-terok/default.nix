@@ -18,10 +18,6 @@ python3Packages.buildPythonPackage rec {
 
   patches = [ ./mkdocs-terok-version.patch ];
 
-  buildInputs = with python3Packages; [
-    hatchling
-    hatch-vcs
-  ];
   propagatedBuildInputs = with python3Packages; [
     properdocs
     pyyaml
@@ -29,7 +25,10 @@ python3Packages.buildPythonPackage rec {
   ];
 
   pyproject = true;
-  build-system = [ python3Packages.setuptools ];
+  build-system = with python3Packages; [
+    hatch-vcs
+    hatchling
+  ];
 
   nativeCheckInputs = with python3Packages; [
     pytest
