@@ -1,4 +1,5 @@
 {
+  lib,
   fetchFromGitHub,
   python3Packages,
   nftables,
@@ -78,6 +79,13 @@ let
     '';
 
     passthru = { inherit integration-tests; };
+
+    meta = with lib; {
+      description = "nftables-based egress firewalling for podman containers with domain-based allowlists";
+      homepage = "https://github.com/terok-ai/terok-shield";
+      license = licenses.asl20;
+      platforms = platforms.linux;
+    };
   };
 
 in

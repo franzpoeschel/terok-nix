@@ -1,4 +1,5 @@
 {
+  lib,
   fetchFromGitHub,
   python3Packages,
   enable-terok-checks,
@@ -42,4 +43,10 @@ python3Packages.buildPythonPackage rec {
     pytest tests/ -v
     runHook postInstallCheck
   '';
+
+  meta = with lib; {
+    description = "Importable modules for mkdocs-gen-files";
+    homepage = "https://github.com/terok-ai/mkdocs-terok";
+    license = licenses.bsd0;
+  };
 }

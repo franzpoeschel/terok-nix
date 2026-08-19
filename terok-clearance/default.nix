@@ -1,4 +1,5 @@
 {
+  lib,
   fetchFromGitHub,
   python3Packages,
   enable-terok-checks,
@@ -86,6 +87,12 @@ let
 
     pythonRuntimeDepsCheckHook = null;
     passthru = { inherit integration-tests; };
+
+    meta = with lib; {
+      description = "Firewall UI and notifications for terok-shield";
+      homepage = "https://github.com/terok-ai/terok-clearance";
+      license = licenses.asl20;
+    };
   };
 
 in

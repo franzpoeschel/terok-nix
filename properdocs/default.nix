@@ -1,4 +1,8 @@
-{ python3Packages, fetchFromGitHub }:
+{
+  lib,
+  python3Packages,
+  fetchFromGitHub,
+}:
 
 python3Packages.buildPythonPackage rec {
   pname = "properdocs";
@@ -32,4 +36,10 @@ python3Packages.buildPythonPackage rec {
   ];
 
   doCheck = false;
+
+  meta = with lib; {
+    description = "ProperDocs documentation toolbox";
+    homepage = "https://properdocs.org/";
+    license = licenses.bsd3;
+  };
 }

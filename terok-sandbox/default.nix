@@ -1,4 +1,5 @@
 {
+  lib,
   fetchFromGitHub,
   python3Packages,
   enable-terok-checks,
@@ -62,4 +63,11 @@ python3Packages.buildPythonPackage rec {
     pytest tests/ -v
     runHook postInstallCheck
   '';
+
+  meta = with lib; {
+    description = "Hardening for podman containers";
+    homepage = "https://github.com/terok-ai/terok-sandbox";
+    license = licenses.asl20;
+    platforms = platforms.linux;
+  };
 }

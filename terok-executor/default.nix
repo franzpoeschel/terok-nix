@@ -1,4 +1,5 @@
 {
+  lib,
   fetchFromGitHub,
   python3Packages,
   enable-terok-checks,
@@ -63,4 +64,11 @@ python3Packages.buildPythonPackage rec {
       sed -i 's|#!${python3Packages.python}/bin/python3|#!/usr/bin/env python3|' "$file"
     done
   '';
+
+  meta = with lib; {
+    description = "AI agent repository and instrumentation for running agents in a terok-sandbox environment";
+    homepage = "https://github.com/terok-ai/terok-executor";
+    license = licenses.asl20;
+    platforms = platforms.linux;
+  };
 }

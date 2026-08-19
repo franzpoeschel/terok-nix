@@ -1,4 +1,5 @@
 {
+  lib,
   fetchPypi,
   python3Packages,
 }:
@@ -22,4 +23,10 @@ python3Packages.buildPythonPackage rec {
   ];
 
   doCheck = true;
+
+  meta = with lib; {
+    description = "Pure Python type-driven asyncio implementation of varlink";
+    homepage = "https://github.com/helmutg/asyncvarlink";
+    license = licenses.lgpl2Only;
+  };
 }

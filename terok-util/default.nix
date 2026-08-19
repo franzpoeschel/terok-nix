@@ -1,4 +1,5 @@
 {
+  lib,
   fetchFromGitHub,
   python3Packages,
   enable-terok-checks,
@@ -46,4 +47,10 @@ python3Packages.buildPythonPackage rec {
   '';
 
   pythonRuntimeDepsCheckHook = null;
+
+  meta = with lib; {
+    description = "Common utility library for the terok ecosystem packages";
+    homepage = "https://github.com/terok-ai/terok-util";
+    license = licenses.asl20;
+  };
 }

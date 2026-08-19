@@ -1,4 +1,5 @@
 {
+  lib,
   fetchFromGitHub,
   python3Packages,
 }:
@@ -22,4 +23,10 @@ python3Packages.buildPythonPackage {
   ];
 
   doCheck = true;
+
+  meta = with lib; {
+    description = "Generate unique and memorable names and ids across various categories";
+    homepage = "https://github.com/aziele/unique-namer";
+    license = licenses.mit;
+  };
 }
