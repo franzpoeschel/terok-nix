@@ -45,6 +45,6 @@
       }
     )
     // {
-      overlays.default = import ./terok-overlay.nix;
+      overlays.default = import ./terok-overlay.nix { };
     };
 }
