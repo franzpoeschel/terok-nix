@@ -37,6 +37,6 @@ python3Packages.buildPythonPackage rec {
   meta = with lib; {
     description = "ProperDocs documentation toolbox";
     homepage = "https://properdocs.org/";
-    license = licenses.bsd3;
+    license = licenses.bsd2;
   };
 }
