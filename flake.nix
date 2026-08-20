@@ -20,21 +20,7 @@
         pkgs = self.legacyPackages.${system};
       in
       {
-        packages = {
-          default = pkgs.terok;
-          inherit (pkgs) terok terok-clearance terok-shield;
-          inherit (pkgs.python3Packages)
-            agent-client-protocol
-            asyncvarlink
-            dbus-fast
-            mkdocs-terok
-            properdocs
-            terok-executor
-            terok-sandbox
-            terok-util
-            unique-namer
-            ;
-        };
+        packages = import ./packages { inherit pkgs; };
         legacyPackages = import ./. {
           pkgs = import nixpkgs;
           inherit system;
