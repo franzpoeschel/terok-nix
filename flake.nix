@@ -33,7 +33,7 @@
           inherit pkgs;
           checks = self.checks.${system};
         };
-        applications = import ./applications { inherit pkgs; };
+        apps = import ./apps { inherit pkgs; };
         checks = {
           pre-commit-check = git-hooks.lib.${system}.run {
             src = ./.;
