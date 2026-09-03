@@ -1,4 +1,5 @@
 {
+  lib,
   fetchFromGitHub,
   python3Packages,
   enable-terok-checks,
@@ -23,13 +24,14 @@ python3Packages.buildPythonPackage rec {
 
   propagatedBuildInputs = with python3Packages; [
     pydantic
-    poetry-core
-    poetry-dynamic-versioning
     ruamel-yaml
   ];
 
   pyproject = true;
-  build-system = [ python3Packages.setuptools ];
+  build-system = with python3Packages; [
+    poetry-core
+    poetry-dynamic-versioning
+  ];
 
   nativeCheckInputs = with python3Packages; [
     pytest
@@ -46,4 +48,10 @@ python3Packages.buildPythonPackage rec {
   '';
 
   pythonRuntimeDepsCheckHook = null;
+
+  meta = with lib; {
+    description = "Common utility library for the terok ecosystem packages";
+    homepage = "https://github.com/terok-ai/terok-util";
+    license = licenses.asl20;
+  };
 }

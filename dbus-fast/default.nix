@@ -1,4 +1,5 @@
 {
+  lib,
   old-dbus-fast,
   fetchFromGitHub,
 }:
@@ -9,8 +10,14 @@ old-dbus-fast.overrideAttrs (
     src = fetchFromGitHub {
       owner = "Bluetooth-Devices";
       repo = "dbus-fast";
-      tag = version;
+      rev = version;
       sha256 = "sha256-eFqsHbtSSyQ4nYSULB9MHJ2JrN0EgOiU4jS4ISDCZ44=";
+    };
+
+    meta = with lib; {
+      description = "A faster version of dbus-next";
+      homepage = "https://github.com/Bluetooth-Devices/dbus-fast";
+      license = licenses.mit;
     };
   }
 )

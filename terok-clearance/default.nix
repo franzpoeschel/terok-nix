@@ -1,4 +1,5 @@
 {
+  lib,
   fetchFromGitHub,
   python3Packages,
   enable-terok-checks,
@@ -60,13 +61,14 @@ let
       asyncvarlink
       dbus-fast
       pyyaml
-      poetry-core
-      poetry-dynamic-versioning
       terok-util
     ];
 
     pyproject = true;
-    build-system = [ python3Packages.setuptools ];
+    build-system = with python3Packages; [
+      poetry-core
+      poetry-dynamic-versioning
+    ];
 
     nativeCheckInputs = with python3Packages; [
       pytest
@@ -86,6 +88,12 @@ let
 
     pythonRuntimeDepsCheckHook = null;
     passthru = { inherit integration-tests; };
+
+    meta = with lib; {
+      description = "Firewall UI and notifications for terok-shield";
+      homepage = "https://github.com/terok-ai/terok-clearance";
+      license = licenses.asl20;
+    };
   };
 
 in

@@ -1,4 +1,5 @@
 {
+  lib,
   fetchFromGitHub,
   python3Packages,
   nftables,
@@ -54,13 +55,14 @@ let
     propagatedBuildInputs = with python3Packages; [
       pydantic
       pyyaml
-      poetry-core
-      poetry-dynamic-versioning
       terok-util
     ];
 
     pyproject = true;
-    build-system = [ python3Packages.setuptools ];
+    build-system = with python3Packages; [
+      poetry-core
+      poetry-dynamic-versioning
+    ];
 
     nativeCheckInputs = with python3Packages; [
       pytest
@@ -78,6 +80,13 @@ let
     '';
 
     passthru = { inherit integration-tests; };
+
+    meta = with lib; {
+      description = "nftables-based egress firewalling for podman containers with domain-based allowlists";
+      homepage = "https://github.com/terok-ai/terok-shield";
+      license = licenses.asl20;
+      platforms = platforms.linux;
+    };
   };
 
 in

@@ -1,4 +1,8 @@
-{ python3Packages, fetchFromGitHub }:
+{
+  lib,
+  python3Packages,
+  fetchFromGitHub,
+}:
 
 python3Packages.buildPythonPackage rec {
   pname = "properdocs";
@@ -11,9 +15,6 @@ python3Packages.buildPythonPackage rec {
     sha256 = "sha256-ACEgR9oNMPEDMLxeSJhNO7dJZBpTOiusfpE7XaXuztE=";
   };
 
-  buildInputs = with python3Packages; [
-    hatchling
-  ];
   propagatedBuildInputs = with python3Packages; [
     click
     ghp-import
@@ -27,9 +28,15 @@ python3Packages.buildPythonPackage rec {
   ];
 
   pyproject = true;
-  build-system = [
-    python3Packages.setuptools
+  build-system = with python3Packages; [
+    hatchling
   ];
 
   doCheck = false;
+
+  meta = with lib; {
+    description = "ProperDocs documentation toolbox";
+    homepage = "https://properdocs.org/";
+    license = licenses.bsd2;
+  };
 }

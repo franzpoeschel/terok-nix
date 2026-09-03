@@ -1,3 +1,7 @@
+{
+  # Overridable, e.g. true for a "with-checks" package set that runs tests.
+  enable-terok-checks ? false,
+}:
 final: prev:
 
 # we get the right callPackge version this way,
@@ -41,7 +45,7 @@ let
 
     python3Packages = final.python3.pkgs;
 
-    enable-terok-checks = builtins.abort "Use an overlay to select if tests should be disabled or enabled.";
+    inherit enable-terok-checks;
   };
 in
 packages

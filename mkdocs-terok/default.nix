@@ -1,4 +1,5 @@
 {
+  lib,
   fetchFromGitHub,
   python3Packages,
   enable-terok-checks,
@@ -17,10 +18,6 @@ python3Packages.buildPythonPackage rec {
 
   patches = [ ./mkdocs-terok-version.patch ];
 
-  buildInputs = with python3Packages; [
-    hatchling
-    hatch-vcs
-  ];
   propagatedBuildInputs = with python3Packages; [
     properdocs
     pyyaml
@@ -28,7 +25,10 @@ python3Packages.buildPythonPackage rec {
   ];
 
   pyproject = true;
-  build-system = [ python3Packages.setuptools ];
+  build-system = with python3Packages; [
+    hatch-vcs
+    hatchling
+  ];
 
   nativeCheckInputs = with python3Packages; [
     pytest
@@ -42,4 +42,10 @@ python3Packages.buildPythonPackage rec {
     pytest tests/ -v
     runHook postInstallCheck
   '';
+
+  meta = with lib; {
+    description = "Importable modules for mkdocs-gen-files";
+    homepage = "https://github.com/terok-ai/mkdocs-terok";
+    license = licenses.bsd0;
+  };
 }

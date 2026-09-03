@@ -5,17 +5,12 @@
 }:
 
 let
-  terok-overlay = import ./terok-overlay.nix;
   make-packages =
     # boolean
     enable-terok-checks:
-    let
-      enable-checks-overlay = _: _: { inherit enable-terok-checks; };
-    in
     pkgs {
       overlays = overlays ++ [
-        terok-overlay
-        enable-checks-overlay
+        (import ./terok-overlay.nix { inherit enable-terok-checks; })
       ];
       inherit system;
     };

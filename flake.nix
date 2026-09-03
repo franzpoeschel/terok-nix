@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    flake-utils.url = "github:numtide/flake-utils";
     git-hooks.url = "github:cachix/git-hooks.nix";
   };
 
@@ -19,6 +20,7 @@
         pkgs = self.legacyPackages.${system};
       in
       {
+        packages = import ./packages { inherit pkgs; };
         legacyPackages = import ./. {
           pkgs = import nixpkgs;
           inherit system;
@@ -31,6 +33,7 @@
           inherit pkgs;
           checks = self.checks.${system};
         };
+        apps = import ./apps { inherit pkgs; };
         checks = {
           pre-commit-check = git-hooks.lib.${system}.run {
             src = ./.;
@@ -44,6 +47,6 @@
       }
     )
     // {
-      overlays.default = import ./terok-overlay.nix;
+      overlays.default = import ./terok-overlay.nix { };
     };
 }

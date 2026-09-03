@@ -1,4 +1,5 @@
 {
+  lib,
   fetchFromGitHub,
   python3Packages,
   enable-terok-checks,
@@ -38,6 +39,9 @@ let
       textual-serve
       unique-namer
       jinja2
+    ];
+
+    build-system = with python3Packages; [
       poetry-core
       poetry-dynamic-versioning
     ];
@@ -59,6 +63,12 @@ let
       runHook postInstallCheck
     '';
     passthru = { inherit integration-tests; };
+
+    meta = with lib; {
+      description = "Manager for podman containers for AI coding agents";
+      homepage = "https://github.com/terok-ai/terok";
+      license = licenses.asl20;
+    };
   };
 
   test-python-env = python3Packages.python.withPackages (

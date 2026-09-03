@@ -1,4 +1,8 @@
-{ python3Packages, fetchFromGitHub }:
+{
+  lib,
+  python3Packages,
+  fetchFromGitHub,
+}:
 
 python3Packages.buildPythonPackage rec {
   pname = "agent-client-protocol";
@@ -22,4 +26,10 @@ python3Packages.buildPythonPackage rec {
   ];
 
   doCheck = false;
+
+  meta = with lib; {
+    description = "Python SDK for ACP clients and agents";
+    homepage = "https://github.com/agentclientprotocol/python-sdk";
+    license = licenses.asl20;
+  };
 }
