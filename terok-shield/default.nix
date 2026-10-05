@@ -9,13 +9,13 @@
 
 let
   pname = "terok-shield";
-  version = "v0.7.2";
+  version = "v0.9.0";
 
   src = fetchFromGitHub {
     owner = "terok-ai";
     repo = "terok-shield";
     rev = version;
-    sha256 = "sha256-Fs7gyIVdD55q/hp64XL5yB++6LZsRmj3qj/gJi8+3/I=";
+    sha256 = "sha256-GImp3irGKfb66pV2fhKL5gP37REIzn/rQ0dS1uq4MzA=";
   };
 
   test-python-env = python3Packages.python.withPackages (
@@ -60,8 +60,8 @@ let
 
     pyproject = true;
     build-system = with python3Packages; [
-      poetry-core
-      poetry-dynamic-versioning
+      hatchling
+      hatch-vcs
     ];
 
     nativeCheckInputs = with python3Packages; [
@@ -75,7 +75,7 @@ let
     installCheckPhase = ''
       runHook preInstallCheck
       export PYTHONPATH="${src}:$PYTHONPATH"
-      pytest tests/ -v --ignore=tests/integration/dns
+      TMPDIR=/tmp pytest tests/ -v --ignore=tests/integration/dns
       runHook postInstallCheck
     '';
 
