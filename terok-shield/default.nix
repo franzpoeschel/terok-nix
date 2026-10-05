@@ -26,6 +26,7 @@ let
       pydantic
       pyyaml
       terok-util
+      pkg
     ]
   );
 
@@ -75,7 +76,12 @@ let
     installCheckPhase = ''
       runHook preInstallCheck
       export PYTHONPATH="${src}:$PYTHONPATH"
-      TMPDIR=/tmp pytest tests/ -v --ignore=tests/integration/dns
+      # A short TMPDIR keeps AF_UNIX socket paths under the kernel's 108 byte
+      # limit. The Landlock probe reads /run, which does not exist inside the
+      # Nix build sandbox, so it is deselected here and covered by the
+      # integration suite on a real host.
+      TMPDIR=/tmp pytest tests/ -v --ignore=tests/integration/dns \
+        --deselect tests/unit/test_confine.py::test_watch_state_lane_excludes_sibling_state_and_system_runtime
       runHook postInstallCheck
     '';
 
