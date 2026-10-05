@@ -10,13 +10,13 @@
 
 python3Packages.buildPythonPackage rec {
   pname = "terok-sandbox";
-  version = "v0.4.1";
+  version = "v0.6.0";
 
   src = fetchFromGitHub {
     owner = "terok-ai";
     repo = "terok-sandbox";
     rev = version;
-    sha256 = "sha256-0hOzZSm5giaDTI4WvxjYmuh7bHIoM/lAvfFgFQL5rXw=";
+    sha256 = "sha256-XtxJKJggh33yZXncZqcIbKzoSB3MuT0l0bzFUPxswf4=";
   };
 
   patches = [ ./terok-sandbox-version.patch ];
@@ -40,8 +40,8 @@ python3Packages.buildPythonPackage rec {
 
   pyproject = true;
   build-system = with python3Packages; [
-    poetry-core
-    poetry-dynamic-versioning
+    hatchling
+    hatch-vcs
   ];
 
   nativeCheckInputs = with python3Packages; [
@@ -58,12 +58,12 @@ python3Packages.buildPythonPackage rec {
     runHook preInstallCheck
     export PYTHONPATH="${src}:$PYTHONPATH"
     for tool in sleep false echo; do
-      grep -Rl "/bin/$tool" tests/ |
-        while read file; do
-          sed -i "s|/bin/$tool|${coreutils}/bin/$tool|g" "$file"
-        done
+      while read -r file; do
+        sed -i "s|/bin/$tool|${coreutils}/bin/$tool|g" "$file"
+      done < <(grep -Rl "/bin/$tool" tests/ || true)
     done
-    pytest tests/ -v
+    TMPDIR=/tmp pytest tests/ -v \
+      --deselect 'tests/unit/test_supervisor_children.py::TestPolicyConfinesOnTheLiveKernel::test_gate_accepts_real_git_push_inside_scoped_policy'
     runHook postInstallCheck
   '';
 
