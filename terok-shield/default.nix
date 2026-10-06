@@ -43,6 +43,11 @@ let
 
     export PYTHONPATH="$dir/src:''${PYTHONPATH:-}"
     export PATH="${nftables}/bin:$PATH"
+    # Install the global hooks with the same interpreter the tests run under.
+    # The setup receipt and hook JSON bind to sys.executable; under Nix the
+    # console-script wrapper reports a different executable than
+    # `python -m pytest`, so invoke setup through the module instead.
+    ${test-python-env}/bin/python -m terok_shield.cli setup
     ${test-python-env}/bin/python \
       -m pytest tests/integration/dns \
       -v

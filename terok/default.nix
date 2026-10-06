@@ -94,6 +94,11 @@ let
 
     export PYTHONPATH="$dir/src:''${PYTHONPATH:-}"
     export PATH="${terok}/bin:${python3Packages.terok-executor}/bin:$PATH"
+    # Install the global shield hooks the podman integration tests require.
+    # The setup receipt binds to sys.executable, so setup must run under this
+    # environment's interpreter (via the module, matching `python -m pytest`,
+    # not the console-script wrapper) or pre_start() sees a stale receipt.
+    ${test-python-env}/bin/python -m terok_shield.cli setup
     ${test-python-env}/bin/python \
       -m pytest tests/ \
       -v \
