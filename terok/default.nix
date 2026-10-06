@@ -77,6 +77,7 @@ let
       pytest
       pytest-asyncio
       mkdocs-terok
+      p.terok
     ]
     ++ terok.propagatedBuildInputs
   );
