@@ -44,9 +44,13 @@ let
     export PATH="${git}/bin:${coreutils}/bin:${nftables}/bin:$PATH"
     # The live-kernel confinement node is deselected in installCheckPhase because
     # the Nix build sandbox cannot apply the policy reliably; run it here on a
-    # real host so the path-isolation proof stays in CI.
+    # real host so the path-isolation proof stays in CI. The vault integration
+    # suite is run too: installCheckPhase exercises unit tests only, so without
+    # this its real aiohttp/sqlite stories would never execute. Podman-backed
+    # nodes skip cleanly where the host lacks podman or the shield hooks.
     ${test-python-env}/bin/python \
-      -m pytest tests/unit/test_supervisor_children.py::TestPolicyConfinesOnTheLiveKernel \
+      -m pytest tests/integration \
+      tests/unit/test_supervisor_children.py::TestPolicyConfinesOnTheLiveKernel \
       -v
   '';
 
