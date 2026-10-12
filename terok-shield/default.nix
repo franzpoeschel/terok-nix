@@ -50,9 +50,13 @@ let
     ${test-python-env}/bin/python -m terok_shield.cli setup
     # The watch-state confinement node is deselected in installCheckPhase because
     # the Nix build sandbox has no /run; run it here on a real host so the
-    # confinement proof stays in CI.
+    # confinement proof stays in CI. The full integration tree is run too: the
+    # podman/nft/hook suites are collected-but-skipped inside the Nix sandbox, so
+    # without this they would never execute anywhere. Capability-marked tests
+    # degrade to skips on a host lacking a given tool, matching `make
+    # test-integration` upstream.
     ${test-python-env}/bin/python \
-      -m pytest tests/integration/dns \
+      -m pytest tests/integration \
       tests/unit/test_confine.py::test_watch_state_lane_excludes_sibling_state_and_system_runtime \
       -v
   '';
