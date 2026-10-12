@@ -46,7 +46,14 @@
     type = "app";
     program = "${pkgs.python3Packages.terok-sandbox.integration-tests}/bin/run";
     meta = {
-      description = "Run the terok-sandbox live-kernel confinement node";
+      description = "Run the terok-sandbox vault integration suite and live-kernel confinement node";
+    };
+  };
+  terok-executor-integration-tests = {
+    type = "app";
+    program = "${pkgs.python3Packages.terok-executor.integration-tests}/bin/run";
+    meta = {
+      description = "Run the terok-executor podman-backed integration suite";
     };
   };
 }
