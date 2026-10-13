@@ -5,7 +5,7 @@
 }:
 
 old-dbus-fast.overrideAttrs (
-  prev: final: rec {
+  final: prev: rec {
     version = "v4.3.0";
     src = fetchFromGitHub {
       owner = "Bluetooth-Devices";
